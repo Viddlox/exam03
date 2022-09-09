@@ -5,37 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcheng < mcheng@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 12:30:30 by mcheng            #+#    #+#             */
-/*   Updated: 2022/09/09 07:41:13 by mcheng           ###   ########.fr       */
+/*   Created: 2022/09/09 08:42:05 by mcheng            #+#    #+#             */
+/*   Updated: 2022/09/09 08:53:03 by mcheng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <unistd.h>
 
-void	ft_write_number(int number)
+int	ft_atoi(const char *str)
 {
-	if (number > 9)
-		ft_write_number(number / 10);
-	write(1, &"0123456789"[number % 10], 1);
-}
+	int	i;
+	int	sign;
+	int	result;
 
-int	main(void)
-{
-	int	number;
-
-	number = 1;
-	while (number <= 100)
+	i = 0;
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	while (str[i] == 43 || str[i] == 45)
 	{
-		if (number % 3 == 0 && number % 5 == 0)
-			write(1, "fizzbuzz", 8);
-		else if (number % 3 == 0)
-			write(1, "fizz", 4);
-		else if (number % 5 == 0)
-			write(1, "buzz", 4);
+		if (str[i] == 45)
+		{
+			sign = -1;
+			i++;
+		}
 		else
-			ft_write_number(number);
-		write(1, "\n", 1);
-		number++;
+			i++;
 	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result *= 10;
+		result += str[i] - '0';
+	}
+	return (result * sign);
 }

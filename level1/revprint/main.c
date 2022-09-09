@@ -5,37 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcheng < mcheng@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 12:30:30 by mcheng            #+#    #+#             */
-/*   Updated: 2022/09/09 07:41:13 by mcheng           ###   ########.fr       */
+/*   Created: 2022/09/09 06:59:09 by mcheng            #+#    #+#             */
+/*   Updated: 2022/09/09 07:40:35 by mcheng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <unistd.h>
 
-void	ft_write_number(int number)
+int	ft_strlen(char *str)
 {
-	if (number > 9)
-		ft_write_number(number / 10);
-	write(1, &"0123456789"[number % 10], 1);
+	int	i;
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	int	number;
+	int	len;
 
-	number = 1;
-	while (number <= 100)
+	if (ac == 2)
 	{
-		if (number % 3 == 0 && number % 5 == 0)
-			write(1, "fizzbuzz", 8);
-		else if (number % 3 == 0)
-			write(1, "fizz", 4);
-		else if (number % 5 == 0)
-			write(1, "buzz", 4);
-		else
-			ft_write_number(number);
+		len = ft_strlen(av[1]);
+		len--;
+		while (len >= 0)
+		{
+			write(1, &av[1][len], 1);
+			len--;
+		}
 		write(1, "\n", 1);
-		number++;
 	}
+	write(1, "\n", 1);
+	return (0);
 }

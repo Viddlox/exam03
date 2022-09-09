@@ -5,37 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcheng < mcheng@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 12:30:30 by mcheng            #+#    #+#             */
-/*   Updated: 2022/09/09 07:41:13 by mcheng           ###   ########.fr       */
+/*   Created: 2022/09/09 08:57:23 by mcheng            #+#    #+#             */
+/*   Updated: 2022/09/09 09:06:46 by mcheng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-void	ft_write_number(int number)
+int	ft_strlen(char *src)
 {
-	if (number > 9)
-		ft_write_number(number / 10);
-	write(1, &"0123456789"[number % 10], 1);
+	int	i;
+	i = 0;
+	while (src[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
 
-int	main(void)
+char    *ft_strdup(char *src)
 {
-	int	number;
+	int	i;
+	char	*new;
+	i = 0;
+	new = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!new)
+		return (0);
+	else if (new == NULL)
+		return (0);
+	while (src[i] != '\0')
+		new[i++] = *src++;
+	new[i] = '\0';
+	return (new);
+}
 
-	number = 1;
-	while (number <= 100)
+int	main(int ac, char **av)
+{
+	char	*mine;
+	char	*theirs;
+
+	if (ac == 2)
 	{
-		if (number % 3 == 0 && number % 5 == 0)
-			write(1, "fizzbuzz", 8);
-		else if (number % 3 == 0)
-			write(1, "fizz", 4);
-		else if (number % 5 == 0)
-			write(1, "buzz", 4);
-		else
-			ft_write_number(number);
-		write(1, "\n", 1);
-		number++;
+		mine = ft_strdup(av[1]);
+		theirs = strdup(av[1]);
+		printf("%s:\n:%s:\n", mine, theirs);
 	}
+	return (0);
 }
